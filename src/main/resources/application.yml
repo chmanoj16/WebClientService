@@ -1,0 +1,29 @@
+server:
+  port: 8088
+
+spring:
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          web-client-oidc:
+            clientId: web-client
+            clientSecret: myWebClientSecret
+            scope:
+              - openid
+              - user
+              - guest.admin
+            authorizationGrantType: authorization_code
+            redirectUri: http://127.0.0.1:8088/login/oauth2/code/web-client-oidc
+            #Update port in auth server config when using web client
+            #Remove oauth2 client dependency from gateway
+
+        provider:
+          web-client-oidc:
+            issuerUri: http://auth-server:8080
+
+
+
+
